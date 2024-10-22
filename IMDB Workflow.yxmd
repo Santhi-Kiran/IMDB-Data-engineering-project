@@ -1,0 +1,287 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2024.1" RunE2="T">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="114" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\18574\Downloads\proj\IMDB_Dataset.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>IMDB_Dataset.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="imdbID" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="title" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="year" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="rating" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="runtime" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="genre" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="released" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="director" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="writer" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="cast" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="metacritic" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="imdbRating" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="imdbVotes" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="poster" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="plot" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="fullplot" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="language" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="country" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="awards" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="lastupdated" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+            <Field name="type" size="254" source="File: C:\Users\18574\Downloads\proj\IMDB_Dataset.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="258" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="imdbID" selected="False" />
+            <SelectField field="year" selected="True" type="Int64" size="8" />
+            <SelectField field="rating" selected="False" />
+            <SelectField field="released" selected="True" type="Date" size="10" />
+            <SelectField field="metacritic" selected="False" />
+            <SelectField field="imdbRating" selected="True" type="Double" size="8" />
+            <SelectField field="imdbVotes" selected="True" type="Int64" size="8" />
+            <SelectField field="poster" selected="False" />
+            <SelectField field="plot" selected="False" />
+            <SelectField field="fullplot" selected="False" />
+            <SelectField field="lastupdated" selected="False" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="378" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="IF Contains([runtime], &quot;h&quot;) THEN&#xA;    (ToNumber(Trim(Regex_Replace([runtime], &quot; .*&quot;, &quot;&quot;))) * 60) &#xA;    + &#xA;    IIF(Contains([runtime], &quot;min&quot;), &#xA;        ToNumber(Trim(Regex_Replace([runtime], &quot;.* h | min&quot;, &quot;&quot;))), &#xA;        0)&#xA;ELSEIF Contains([runtime], &quot;min&quot;) THEN&#xA;    ToNumber(Trim(Regex_Replace([runtime], &quot; min&quot;, &quot;&quot;)))&#xA;ELSE&#xA;    0&#xA;ENDIF" field="runtime" size="254" type="V_String" enabled="true" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>runtime = IF Contains([runtime], "h") THEN
+    (ToNumber(Trim(Regex_Replace([run...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings>
+        <Position x="606" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Value name="Check Box (135)">False</Value>
+          <Value name="Check Box (136)">False</Value>
+          <Value name="List Box (11)">""</Value>
+          <Value name="Check Box (84)">True</Value>
+          <Value name="Check Box (117)">True</Value>
+          <Value name="Check Box (15)">True</Value>
+          <Value name="Check Box (109)">False</Value>
+          <Value name="Check Box (122)">False</Value>
+          <Value name="Check Box (53)">False</Value>
+          <Value name="Check Box (58)">False</Value>
+          <Value name="Check Box (70)">False</Value>
+          <Value name="Check Box (77)">False</Value>
+          <Value name="Drop Down (81)">upper</Value>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+      </Properties>
+      <EngineSettings Macro="Cleanse.yxmc" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Unique.Unique">
+        <Position x="690" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UniqueFields>
+            <Field field="title" />
+            <Field field="year" />
+            <Field field="runtime" />
+          </UniqueFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnique" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="474" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="runtime" selected="True" type="Int64" size="8" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="810" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="0">C:\Users\18574\Downloads\proj\IMDB_Clean.csv</File>
+          <Passwords />
+          <Disable>False</Disable>
+          <FormatSpecificOptions>
+            <LineEndStyle>CRLF</LineEndStyle>
+            <Delimeter>,</Delimeter>
+            <ForceQuotes>False</ForceQuotes>
+            <HeaderRow>True</HeaderRow>
+            <CodePage>28591</CodePage>
+            <WriteBOM>True</WriteBOM>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>IMDB_Clean.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output26" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Unique" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="6" Connection="Input2" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <IsTemplate value="False" />
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>IMDB Workflow</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="0ce2b668-2246-42e4-b6a3-ec9c1e1cb121" />
+      <Telemetry>
+        <PreviousWorkflowId value="f33f6412-504e-4b61-ba6d-9d8b04a035e3" />
+        <OriginWorkflowId value="f33f6412-504e-4b61-ba6d-9d8b04a035e3" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
